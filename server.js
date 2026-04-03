@@ -15,11 +15,12 @@ import {
   connectMongoDB,
   connectPostgres,
 } from "./src/Config/database.config.js";
+import { createUserTable } from "./src/data/createUserTable.js";
 
 //Database connections
 connectMongoDB();
 connectPostgres();
-
+createUserTable();
 //
 const PORT = process.env.PORT || 4001;
 const app = express();
@@ -33,17 +34,24 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"], //headers allowed
   }),
 );
-app.use("/", (req, res, next) => {
-  console.log(req.url, req.method);
-  res.status(200).json({
-    message: "Your server is running",
-    success: true,
-  });
-  next();
-});
 
 // Routes
 
+app.use("/", (req, res) => {
+  console.log(`Path: '${req.url}' Method: '${req.method}'`);
+
+  return res.status(200).json({
+    message: "Your server is running",
+    success: true,
+  });
+});
+
+app.use((req, res) => {
+  return res.status(404).json({
+    message: "Route Not Found",
+    success: false,
+  });
+});
 // server running log
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

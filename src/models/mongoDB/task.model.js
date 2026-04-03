@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const taskSchema = mongoose.Schema(
   {
+    createdBy: {},
     title: { type: String, default: "" },
     description: {
       type: String,
