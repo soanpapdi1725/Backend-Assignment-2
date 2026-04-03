@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const taskSchema = mongoose.Schema(
   {
-    createdBy: {},
+    createdBy: { type: Number, required: true },
     title: { type: String, default: "" },
     description: {
       type: String,
@@ -26,4 +26,4 @@ const taskSchema = mongoose.Schema(
   { timestamps: true },
 );
 
-module.exports = mongoose.model("Task", taskSchema)
+export default mongoose.model("Task", taskSchema);

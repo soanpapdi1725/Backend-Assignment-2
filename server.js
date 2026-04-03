@@ -5,7 +5,7 @@
 // Moved to import
 
 // external Module
-import express, { urlencoded } from "express";
+import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import "dotenv/config";
@@ -16,6 +16,7 @@ import {
   connectPostgres,
 } from "./src/Config/database.config.js";
 import { createUserTable } from "./src/data/createUserTable.js";
+import authRouter from "./src/Router/auth.router.js";
 
 //Database connections
 connectMongoDB();
@@ -27,6 +28,7 @@ const app = express();
 
 // middlewares
 app.use(express.json());
+app.use(cookieParser());
 app.use(
   cors({
     origin: [], // for frontend
@@ -36,6 +38,7 @@ app.use(
 );
 
 // Routes
+app.use("/api/v1/auth", authRouter);
 
 app.use("/", (req, res) => {
   console.log(`Path: '${req.url}' Method: '${req.method}'`);

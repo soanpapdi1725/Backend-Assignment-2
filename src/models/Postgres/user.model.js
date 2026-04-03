@@ -1,4 +1,4 @@
-import { pgPool } from "../../Config/database.config";
+import { pgPool } from "../../Config/database.config.js";
 
 // createUser function is Registering User in our postgres Database
 export const createUser = async (firstName, lastName, email, password) => {
@@ -22,4 +22,3 @@ export const findUserById = async (id) => {
   const result = await pgPool.query(query, [id]);
   return result.rows[0];
 };
-
