@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "This is an assignment-2 given by Conversely.ai for Backend Developer Intern which is given on date 01-04-2026, 9:44 pm and has deadline 04-04-2026, 9:44 pm",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -24,8 +26,13 @@
     "nodemon": "^3.1.14"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.6",
     "dotenv": "^17.4.0",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.3.3",
+    "pg": "^8.20.0"
   }
 }
