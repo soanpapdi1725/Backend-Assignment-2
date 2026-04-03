@@ -1,0 +1,31 @@
+{
+  "name": "backend-assignment-2",
+  "version": "1.0.0",
+  "description": "This is an assignment-2 given by Conversely.ai for Backend Developer Intern which is given on date 01-04-2026, 9:44 pm and has deadline 04-04-2026, 9:44 pm",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soanpapdi1725/Backend-Assignment-2.git"
+  },
+  "keywords": [
+    "npm"
+  ],
+  "author": "Sonu Yadav(Soanpapdi1725)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/soanpapdi1725/Backend-Assignment-2/issues"
+  },
+  "homepage": "https://github.com/soanpapdi1725/Backend-Assignment-2#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1"
+  }
+}
