@@ -42,7 +42,6 @@ export const getAllTasks = async (req, res) => {
   try {
     // get userId from request.user which is setted up while checking middleWare
     const userId = req.user.id;
-
     // get all tasks with that userId
     const allTasksByUser = await Tasks.find({ createdBy: userId }).sort({
       createdAt: -1,
@@ -69,7 +68,6 @@ export const getTaskById = async (req, res) => {
     // check TaskId in our database using FindOne
     const task = await Tasks.findOne({ _id: taskId, createdBy: userId });
     // if Found then send task details else send 404
-
     if (!task) {
       return sendResponse(res, 404, false, "Task Not Found");
     }
@@ -91,7 +89,9 @@ export const updateTask = async (req, res) => {
     // getting userId coming from req.user.id which setted up from decodingToken
     const userId = req.user.id;
 
-    //Validation -> taskValidator
+    if (!description || !dueDate) {
+      return sendResponse(res, 400, true, "Fields must be filled");
+    }
 
     const updatedTask = await Tasks.findOneAndUpdate(
       { _id: taskId, createdBy: userId },

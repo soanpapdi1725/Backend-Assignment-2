@@ -21,7 +21,7 @@ taskRouter.get("/All", isAuthorized, getAllTasks);
 taskRouter.get("/:taskId", isAuthorized, getTaskById);
 
 // updateTaskById -> (PUT) request
-taskRouter.put("/update/:taskId", isAuthorized, validateTask, updateTask);
+taskRouter.put("/update/:taskId", isAuthorized, updateTask);
 
 // updateTaskById -> (PUT) request
 taskRouter.delete("/delete/:taskId", isAuthorized, deleteTask);
