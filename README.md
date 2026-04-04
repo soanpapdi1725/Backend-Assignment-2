@@ -1,80 +1,99 @@
 # Backend Assignment 2 - Conversely.ai
 
-This is the completed backend assignment for the Conversely.ai Backend Developer Intern position. It is built using Node.js, Express, MongoDB (via Mongoose), and PostgreSQL (via pg). 
+## Demo Video
+[Watch the Demo Video](https://drive.google.com/file/d/1vNWNx7unR5sAPpidws-IUQlWnwd0VUvz/view?usp=drive_link)
+
+## Docs
+[View Postman API Documentation](https://documenter.getpostman.com/view/47277320/2sBXiqDTt3)
+
+## Description
+This is an Express.js REST API providing user authentication, task management, and user profiling, utilizing a dual database strategy connecting to both MongoDB and PostgreSQL.
+
+This was developed as the assignment given by Conversely.ai for a Backend Developer Intern role.
 
 ## Features
-- **Express.js API** (built using ES modules)
-- **Database Integration:** Supports both MongoDB and PostgreSQL endpoints as per requirements.
-- **Authentication:** JWT-based authentication using `jsonwebtoken` and `bcryptjs`.
-- **Validation:** Input validation handled via `express-validator`.
+- **User Authentication**: Secure signup and login mechanisms using JWT.
+- **User Profiles**: Manage and retrieve user profile details.
+- **Task Management**: Endpoints for handling task creation, specific retrievals via routes.
+- **Dual Database Strategy**: Designed to operate with both a SQL (PostgreSQL) and a NoSQL (MongoDB) database.
 
----
+## Prerequisites
+Before you begin, ensure you have met the following requirements:
+- **Node.js** (v18.x or higher)
+- **npm** (comes with Node.js)
+- **PostgreSQL** installed and running on your local machine or a cloud provider.
+- **MongoDB** running locally or a cloud instance like MongoDB Atlas.
 
-## 🚀 Setup & Installation Instructions
+## Getting Started
 
-Follow these instructions to set up and run the application locally on your machine.
+Follow these clear instructions to set up and run the application locally.
 
-### 1. Prerequisites
-Ensure you have the following installed on your machine:
-- [Node.js](https://nodejs.org/en/) (v14 or higher)
-- [MongoDB](https://www.mongodb.com/try/download/community) (running locally or a MongoDB Atlas URI)
-- [PostgreSQL](https://www.postgresql.org/download/) (running locally)
-
-### 2. Clone the Repository
+### 1. Clone the repository
 ```bash
 git clone https://github.com/soanpapdi1725/Backend-Assignment-2.git
 cd Backend-Assignment-2
 ```
 
-### 3. Install Dependencies
-Run the following command to install all required packages:
+### 2. Install dependencies
 ```bash
 npm install
 ```
 
-### 4. Database Setup & Configuration
-You need to set up environment variables for the application to connect to the databases and configure the server.
+### 3. Database Setup
 
-Create a `.env` file in the root directory:
-```bash
-touch .env
-```
+#### PostgreSQL Setup
+1. Ensure the PostgreSQL service is running on your system.
+2. Open a database command line (like `psql`) or a GUI tool (like pgAdmin).
+3. Create a new database for the application to use. In your tool, simply run:
+   ```sql
+   CREATE DATABASE "Users-DB";
+   ```
+4. Note your database superuser credentials (typically `postgres` with a password you created upon installing).
 
-Add the following configuration to your `.env` file:
-```env
+#### MongoDB Setup
+1. Download, install, and run MongoDB locally, or set up a free cluster on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+2. Obtain the standard MongoDB Connection String URI.
+
+### 4. Environment Configuration
+Create a `.env` file in the root directory of your project. Copy the template below and substitute the placeholder values with your actual database and JWT configurations:
+
+```ini
+# Server Configuration
 PORT=4000
 
-# MongoDB Connection String (Replace with your own if using local DB, e.g., mongodb://localhost:27017/my_database)
-MONGODB_URI=mongodb+srv://<username>:<password>@<cluster-url>/?appName=<appName>
+# MongoDB Configuration
+MONGODB_URI=mongodb+srv://<username>:<password>@<your_cluster_address>.mongodb.net/?appName=<Your_App_Name>
 
-# PostgreSQL Connection String 
-# Format: postgresql://<username>:<password>@localhost:5432/<database_name>
-POSTGRES_URI=postgresql://postgres:your_password@localhost:5432/Users-DB
+# PostgreSQL Configuration
+# Format: postgresql://<username>:<password>@<host>:<port>/<database_name>
+POSTGRES_URI=postgresql://postgres:<your_db_password>@localhost:5432/Users-DB
 
-# Secret key for JWT Authentication
-JWT_SECRET=your_super_secret_key_here
+# JWT Authentication
+JWT_SECRET=your_jwt_secret_key
 ```
 
-**Note on PostgreSQL Database:**
-Make sure you have PostgreSQL running locally on port `5432`. You will also need to manually create the database referred to in your `POSTGRES_URI` (e.g., `Users-DB`) before starting the app.
-You can create the database using the `psql` command line:
-```bash
-psql -U postgres
-CREATE DATABASE "Users-DB";
-```
+### 5. Running the Application
+The initial startup schema is synchronized internally (via `createUserTable()`), so you do not need to construct the SQL tables manually.
 
-### 5. Start the Application
-
-You can start the server in two ways:
-
-**Development Mode** (uses `nodemon` for hot-reloading when files change):
+To start the server in development mode (using nodemon for hot reloads):
 ```bash
 npm run dev
 ```
 
-**Production Mode:**
+To start the server natively using node:
 ```bash
 npm start
 ```
 
-If everything is configured properly, you should see messages indicating that the server is running on `http://localhost:4000` and successfully connected to the databases.
+You should see logs indicating successful backend connection to both databases, followed by:
+```bash
+Server running on http://localhost:4000
+```
+
+### 6. API Endpoints Outline
+Once resolving `http://localhost:4000/`, you can hit the following base routes:
+
+- `API Healthcheck`: `GET /`
+- `Authentication Routes`: `/api/v1/auth`
+- `Task Routes`: `/api/v1/tasks`
+- `Profile Routes`: `/api/v1/profile`

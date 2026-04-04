@@ -1,5 +1,6 @@
 import { deleteUserById, findUserById } from "../models/Postgres/user.model.js";
 import { sendResponse } from "../Utils/sendResponse.utils.js";
+import Tasks from "../models/mongoDB/task.model.js";
 
 export const getProfile = async (req, res) => {
   try {
@@ -51,6 +52,9 @@ export const deleteUser = async (req, res) => {
 
     const deletedProfile = await deleteUserById(userId);
 
+    await Tasks.deleteMany({
+      createdBy: userId,
+    });
     if (!deletedProfile) {
       return sendResponse(res, 404, false, "User not found to delete");
     }

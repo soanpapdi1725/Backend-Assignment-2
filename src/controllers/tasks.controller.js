@@ -72,7 +72,7 @@ export const getTaskById = async (req, res) => {
       return sendResponse(res, 404, false, "Task Not Found");
     }
 
-    return sendResponse(res, 200, true, "Task Sent Successfully");
+    return sendResponse(res, 200, true, "Task Sent Successfully", task);
   } catch (error) {
     console.log("Error while sending the task to user", error.message);
     return sendResponse(res, 500, false, "Failed to retrieve the task");
@@ -89,7 +89,7 @@ export const updateTask = async (req, res) => {
     // getting userId coming from req.user.id which setted up from decodingToken
     const userId = req.user.id;
 
-    if (!description || !dueDate) {
+    if (!title || !description || !dueDate) {
       return sendResponse(res, 400, true, "Fields must be filled");
     }
 
@@ -115,15 +115,16 @@ export const deleteTask = async (req, res) => {
     const { taskId } = req.params;
     const userId = req.user.id;
 
+    console.log(typeof userId);
     const deletedTask = await Tasks.findOneAndDelete({
       _id: taskId,
-      createdBy: userId,
+      createdBy: Number(userId),
     });
 
+    console.log(deletedTask);
     if (!deletedTask) {
-      return sendResponse(res, 404, false, "Task Not found to delete");
+      return sendResponse(res, 404, false, "Task not found or unauthorized");
     }
-
     return sendResponse(res, 200, true, "Task Deleted Successfully");
   } catch (error) {
     console.log("Error while Deleting the task", error.message);
