@@ -68,8 +68,8 @@ export const getAllTasks = async (req, res) => {
     return sendResponse(res, 500, false, "Failed to retrieve all the tasks");
   }
 };
-// 3. Get Single Task by Id
 
+// 3. Get Single Task by Id
 export const getTaskById = async (req, res) => {
   try {
     
