@@ -20,9 +20,9 @@ import authRouter from "./src/Router/auth.router.js";
 import taskRouter from "./src/Router/task.router.js";
 
 //Database connections
-connectMongoDB();
-connectPostgres();
-createUserTable();
+await connectMongoDB();
+await connectPostgres();
+await createUserTable();
 //
 const PORT = process.env.PORT || 4001;
 const app = express();
@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: [], // for frontend
+    origin: "*", // for frontend
     methods: ["GET", "POST", "DELETE", "PUT"], //accepting methods
     allowedHeaders: ["Content-Type", "Authorization"], //headers allowed
   }),
@@ -40,9 +40,9 @@ app.use(
 
 // Routes
 app.use("/api/v1/auth", authRouter);
-app.use("/api/v1/task", taskRouter);
+app.use("/api/v1/tasks", taskRouter);
 
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   console.log(`Path: '${req.url}' Method: '${req.method}'`);
 
   return res.status(200).json({
