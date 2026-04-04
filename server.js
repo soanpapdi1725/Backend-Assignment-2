@@ -17,6 +17,7 @@ import {
 } from "./src/Config/database.config.js";
 import { createUserTable } from "./src/data/createUserTable.js";
 import authRouter from "./src/Router/auth.router.js";
+import taskRouter from "./src/Router/task.router.js";
 
 //Database connections
 connectMongoDB();
@@ -39,6 +40,7 @@ app.use(
 
 // Routes
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/task", taskRouter);
 
 app.use("/", (req, res) => {
   console.log(`Path: '${req.url}' Method: '${req.method}'`);

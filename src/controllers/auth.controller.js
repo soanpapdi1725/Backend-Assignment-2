@@ -8,7 +8,7 @@ import { createUser, findUserByEmail } from "../models/Postgres/user.model.js";
 import { sendResponse } from "../Utils/sendResponse.utils.js";
 
 // Not used Express Validator because i want to send Status code
-
+// Register Controller
 export const postRegister = async (req, res) => {
   try {
     // firstName, lastName, email, password come from req.body
@@ -62,7 +62,7 @@ export const postRegister = async (req, res) => {
     );
   }
 };
-
+// Login Controller
 export const postLogin = async (req, res) => {
   try {
     // get email and password from req.body

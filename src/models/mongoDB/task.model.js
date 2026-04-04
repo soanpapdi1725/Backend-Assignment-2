@@ -3,20 +3,16 @@ import mongoose from "mongoose";
 const taskSchema = mongoose.Schema(
   {
     createdBy: { type: Number, required: true },
-    title: { type: String, default: "" },
+    title: { type: String, default: "", trim: true },
     description: {
       type: String,
       default: "",
-      required: () => {
+      required: function () {
         return this.title === "";
       },
+      trim: true,
     },
     dueDate: { type: Date, required: true },
-    // providing LastUpdated because when we edit the tasks we should have the timing when it was last updated
-    lastUpdated: {
-      type: Date,
-      default: Date.now(),
-    },
     status: {
       type: String,
       enum: ["Pending", "Completed"],
