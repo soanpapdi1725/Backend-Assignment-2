@@ -4,7 +4,11 @@ import jwt from "jsonwebtoken";
 import "dotenv/config";
 
 // Local Modules
-import { createUser, findUserByEmail } from "../models/Postgres/user.model.js";
+import {
+  createUser,
+  findUserByEmail,
+  findUserById,
+} from "../models/Postgres/user.model.js";
 import { sendResponse } from "../Utils/sendResponse.utils.js";
 
 // Not used Express Validator because i want to send Status code
@@ -113,3 +117,4 @@ export const postLogin = async (req, res) => {
     return sendResponse(res, 500, false, `Login Failure, Please Try Again...`);
   }
 };
+

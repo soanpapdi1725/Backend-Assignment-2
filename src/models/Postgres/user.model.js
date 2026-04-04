@@ -22,3 +22,9 @@ export const findUserById = async (id) => {
   const result = await pgPool.query(query, [id]);
   return result.rows[0];
 };
+
+export const deleteUserById = async (id) => {
+  const query = `DELETE FROM users WHERE id = $1 RETURNING *`;
+  const result = await pgPool.query(query, [id]);
+  return result.rows[0];
+};
