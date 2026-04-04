@@ -1,7 +1,7 @@
 # Backend Assignment 2 - Conversely.ai
 
 ## Demo Video
-[Watch the Demo Video](https://drive.google.com/file/d/1vNWNx7unR5sAPpidws-IUQlWnwd0VUvz/view?usp=drive_link)
+[Watch the Demo Video](https://drive.google.com/file/d/1tJq9G27g32bmG5CXVZD7sToFOIPPXJRF/view?usp=sharing)
 
 ## Docs
 [View Postman API Documentation](https://documenter.getpostman.com/view/47277320/2sBXiqDTt3)
