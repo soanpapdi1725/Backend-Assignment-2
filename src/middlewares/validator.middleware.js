@@ -41,33 +41,24 @@ export const validateUser = (req, res, next) => {
 };
 
 const taskSchema = Joi.object({
-  title: Joi.string()
-    .trim()
-    .min(1)
-    .messages({
-      "string.base": "Title must be a string",
-      "string.empty": "Title is required",
-      "string.min": "Title must be at least 1 character long",
-      "any.required": "Title is required",
-    }),
+  title: Joi.string().trim().min(1).required().messages({
+    "string.base": "Title must be a string",
+    "string.empty": "Title is required",
+    "string.min": "Title must be at least 1 character long",
+    "any.required": "Title is required",
+  }),
 
-  description: Joi.string()
-    .trim()
-    .required()
-    .messages({
-      "string.base": "Description must be a string",
-      "string.empty": "Description is required",
-      "any.required": "Description is required",
-    }),
+  description: Joi.string().trim().required().messages({
+    "string.base": "Description must be a string",
+    "string.empty": "Description is required",
+    "any.required": "Description is required",
+  }),
 
-  dueDate: Joi.date()
-    .min("now")
-    .required()
-    .messages({
-      "date.base": "Due date must be a valid date",
-      "date.min": "Due date cannot be in the past",
-      "any.required": "Due date is required",
-    }),
+  dueDate: Joi.date().min("now").required().messages({
+    "date.base": "Due date must be a valid date",
+    "date.min": "Due date cannot be in the past",
+    "any.required": "Due date is required",
+  }),
 });
 
 export const validateTask = (req, res, next) => {
