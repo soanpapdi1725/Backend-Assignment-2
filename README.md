@@ -97,3 +97,20 @@ Once resolving `http://localhost:4000/`, you can hit the following base routes:
 - `Authentication Routes`: `/api/v1/auth`
 - `Task Routes`: `/api/v1/tasks`
 - `Profile Routes`: `/api/v1/profile`
+
+## Folder Structure
+```text
+Backend-Assignment-2/
+├── .env                  # Environment configuration
+├── .gitignore            # Git ignored files
+├── package.json          # Project metadata and dependencies
+├── server.js             # Application entry point
+└── src/                  # Source code
+    ├── Config/           # Database and application configuration
+    ├── controllers/      # Route controllers (logic)
+    ├── data/             # Database initialization (e.g. createUserTable.js)
+    ├── middlewares/      # Express middlewares (auth, etc)
+    ├── models/           # Database models/schemas
+    ├── Router/           # Express route definitions
+    └── Utils/            # Helper functions and utilities
+```
