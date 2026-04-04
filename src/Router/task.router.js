@@ -7,11 +7,12 @@ import {
   updateTask,
 } from "../controllers/tasks.controller.js";
 import { isAuthorized } from "../middlewares/auth.middleware.js";
+import { validateTask } from "../middlewares/validator.middleware.js";
 
 const taskRouter = express.Router();
 
 // Create Tasks -> (POST) Request -> req.body will have the data
-taskRouter.post("/create", isAuthorized, createTask);
+taskRouter.post("/create", isAuthorized, validateTask, createTask);
 
 // getAllTasks -> (get) Request
 taskRouter.get("/All", isAuthorized, getAllTasks);
@@ -20,7 +21,7 @@ taskRouter.get("/All", isAuthorized, getAllTasks);
 taskRouter.get("/:taskId", isAuthorized, getTaskById);
 
 // updateTaskById -> (PUT) request
-taskRouter.put("/update/:taskId", isAuthorized, updateTask);
+taskRouter.put("/update/:taskId", isAuthorized, validateTask, updateTask);
 
 // updateTaskById -> (PUT) request
 taskRouter.delete("/delete/:taskId", isAuthorized, deleteTask);

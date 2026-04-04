@@ -53,7 +53,7 @@ app.get("/", (req, res) => {
   });
 });
 
-app.use((req, res) => {
+app.use((res) => {
   return res.status(404).json({
     message: "Route Not Found",
     success: false,

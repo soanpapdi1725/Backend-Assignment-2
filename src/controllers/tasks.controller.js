@@ -14,22 +14,8 @@ export const createTask = async (req, res) => {
     // we will get userId from req.body.id setted up while cheching isAuthorized
     const userId = req.user.id;
 
-    // Validating UserId, Description, Date that are they empty or not
-    if (!description || !dueDate) {
-      return sendResponse(res, 400, false, "Required Fields Cannot be Empty");
-    }
-    // Checking if Date entered by User is already passed or not if passed then return the response
-    const taskDate = new Date(dueDate);
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    if (taskDate < today) {
-      return sendResponse(
-        res,
-        400,
-        false,
-        "Task of dueDate older than today cannot be Created",
-      );
-    }
+    // Validating UserId, Description, Date that are they empty or not -> taskValidator
+    // Checking if Date entered by User is already passed or not if passed then return the response -> taskValidator
     // create Document in the MongoDB
     const task = await Tasks.create({
       createdBy: userId,
@@ -105,14 +91,7 @@ export const updateTask = async (req, res) => {
     // getting userId coming from req.user.id which setted up from decodingToken
     const userId = req.user.id;
 
-    if (!description || !dueDate) {
-      return sendResponse(
-        res,
-        400,
-        false,
-        "Description and DueDate Cannot be empty",
-      );
-    }
+    //Validation -> taskValidator
 
     const updatedTask = await Tasks.findOneAndUpdate(
       { _id: taskId, createdBy: userId },

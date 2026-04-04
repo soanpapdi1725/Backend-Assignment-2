@@ -17,22 +17,11 @@ export const postRegister = async (req, res) => {
   try {
     // firstName, lastName, email, password come from req.body
     console.log(req.body);
-    const { firstName, lastName, email, password, confirmPassword } = req.body;
+    const { firstName, lastName, email, password} = req.body;
     // are they empty or not if true then response 400
-    if (!firstName || !email || !password || !confirmPassword) {
-      return sendResponse(res, 400, false, "Fields cannot be empty");
-    }
     // validation of them are correct or not response 400
     // if they are correct
     // check Password and ConfirmPassword are matching or not
-    if (password !== confirmPassword) {
-      return sendResponse(
-        res,
-        400,
-        false,
-        "Password and confirm password are not matching",
-      );
-    }
     // then check does that email exist in our postgresDB or not
     // if not then send response that you already registered with us response code
     const user = await findUserByEmail(email);
