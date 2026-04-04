@@ -12,6 +12,7 @@ import { sendResponse } from "../Utils/sendResponse.utils.js";
 export const postRegister = async (req, res) => {
   try {
     // firstName, lastName, email, password come from req.body
+    console.log(req.body);
     const { firstName, lastName, email, password, confirmPassword } = req.body;
     // are they empty or not if true then response 400
     if (!firstName || !email || !password || !confirmPassword) {

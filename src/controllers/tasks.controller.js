@@ -47,9 +47,41 @@ export const createTask = async (req, res) => {
 };
 // 2. Get All tasks of a User id
 
-export const getAllTasks = async () => {
-    
-} 
+export const getAllTasks = async (req, res) => {
+  try {
+    // get userId from request.user which is setted up while checking middleWare
+    const userId = req.user.id;
+
+    // get all tasks with that userId
+    const allTasksByUser = await Tasks.find({ createdBy: userId }).sort({
+      createdAt: -1,
+    });
+    return sendResponse(
+      res,
+      200,
+      true,
+      "User Tasks Sent Successfully",
+      allTasksByUser,
+    );
+  } catch (error) {
+    console.log("Error while sending All the tasks to user", error.message);
+    return sendResponse(res, 500, false, "Failed to retrieve all the tasks");
+  }
+};
 // 3. Get Single Task by Id
+
+export const getTaskById = async (req, res) => {
+  try {
+    
+  } catch (error) {}
+};
 // 4. Update Single Task By Id
+export const updateTask = async (req, res) => {
+  try {
+  } catch (error) {}
+};
 // 5. Delete Single Task By Id
+export const deleteTask = async (req, res) => {
+  try {
+  } catch (error) {}
+};
